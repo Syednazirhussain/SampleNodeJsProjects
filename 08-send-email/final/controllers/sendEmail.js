@@ -4,6 +4,7 @@ const sgMail = require('@sendgrid/mail');
 const sendEmailEthereal = async (req, res) => {
   let testAccount = await nodemailer.createTestAccount();
 
+  /*
   const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
@@ -12,11 +13,21 @@ const sendEmailEthereal = async (req, res) => {
       pass: 'va4q5BKKtry7aq58Gv',
     },
   });
+  */
+
+  const transporter = nodemailer.createTransport({
+    host: "smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "afdc804c1aa7b6",
+      pass: "ea66fcfa2d401b"
+    }
+  });
 
   let info = await transporter.sendMail({
-    from: '"Coding Addict" <codingaddict@gmail.com>',
-    to: 'bar@example.com',
-    subject: 'Hello',
+    from: '"Syed Nazir Hussain" <syednazir13@gmail.com>',
+    to: 'nazir.hussain@branex.com',
+    subject: 'Welcome to NST',
     html: '<h2>Sending Emails with Node.js</h2>',
   });
 
@@ -36,4 +47,4 @@ const sendEmail = async (req, res) => {
   res.json(info);
 };
 
-module.exports = sendEmail;
+module.exports = { sendEmail, sendEmailEthereal };
